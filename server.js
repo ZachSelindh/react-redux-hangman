@@ -5,13 +5,19 @@ require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.ENVIRONMENT === "development") {
+/* if (process.env.ENVIRONMENT === "development") {
     // Dev route
     app.use(express.static(path.join(__dirname, "client/public")));
   } else if (process.env.ENVIRONMENT === "production") {
     // Build route
-    app.use(express.static(path.join(__dirname, "client", "build", "index.html")));
-  }
+    app.use(express.static(path.join(__dirname, "client", "build")));
+  } */
+
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 const PORT = process.env.PORT || 3001;
 
